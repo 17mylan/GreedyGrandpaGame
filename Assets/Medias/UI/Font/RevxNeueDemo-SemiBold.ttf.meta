@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: dcd70856ee526d743a3c27bca3cf310b
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Revx Neue Demo
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: b0f50212edc0d874bbfcd467d871e4bc, type: 3}
+  - {fileID: 12800000, guid: fb9219331f63ef64d83e6404da73a24e, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
