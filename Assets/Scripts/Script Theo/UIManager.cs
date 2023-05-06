@@ -33,8 +33,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI playerGrenadeText;
     private PlayerShooting playerShooting;
     [Header("Prefabs")] [SerializeField] public GameObject WaveAnnouncementPrefab;
-    
-    
+    private SpawnerEnnemi spawnerEnnemi;
     #endregion
 
     private void Awake()

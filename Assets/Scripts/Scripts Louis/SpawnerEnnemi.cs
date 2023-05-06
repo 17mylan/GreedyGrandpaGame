@@ -6,6 +6,8 @@ using UnityEngine;
 using Unity.Mathematics;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 [Description("Script à mettre sur le gameManager, il gère le système de wave ainsi que le spawn des ennemis")]
 public class SpawnerEnnemi : MonoBehaviour
@@ -55,10 +57,13 @@ public class SpawnerEnnemi : MonoBehaviour
     public int enemySpawned;
     private bool actionDoned;
     public int kills;
-
+    public TextMeshProUGUI currentWaveText;
+    public AudioSource audioSource;
+    public AudioClip newWaveClip;
     private void Start()
     {
         vagueActuelle = 1;
+        currentWaveText.text = "Current Wave: " + vagueActuelle;
         timerSpawnEnemy = tempsEntreVagues;
         waveIsRunning = true;
         PlayerPrefs.SetInt("Wave", 1);
@@ -126,6 +131,8 @@ public class SpawnerEnnemi : MonoBehaviour
         UIManager.instance.ResetKills();
         UIManager.instance.NewWaveAnnouncement();
         vagueActuelle++;
+        audioSource.PlayOneShot(newWaveClip);
+        currentWaveText.text = "Current Wave: " + vagueActuelle;
         PlayerPrefs.SetInt("Wave", vagueActuelle);
         nbEnnemisParVague = 30 + 15 * vagueActuelle;
         waveIsRunning = true;
@@ -133,6 +140,5 @@ public class SpawnerEnnemi : MonoBehaviour
         actionDoned = true;
 
     }
-    
 
 }

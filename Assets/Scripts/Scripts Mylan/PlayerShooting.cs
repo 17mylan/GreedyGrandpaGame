@@ -40,6 +40,7 @@ public class PlayerShooting : MonoBehaviour
     public bool isMaxHeat = false;
     public bool isWalking;
     public bool cooldownGrenade = false;
+    public bool canShoot = true;
     [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip shootSong, walkSong, deathSong;
@@ -52,6 +53,7 @@ public class PlayerShooting : MonoBehaviour
     private UI_ShopMenu uI_ShopMenu;
     public GameObject shopUI;
     public TextMeshProUGUI grenadeCounterText;
+    public GameObject interactionMenuMarchand;
     
     void Start()
     {
@@ -115,17 +117,22 @@ public class PlayerShooting : MonoBehaviour
         yield return new WaitForSeconds(grenadeDelay);
         cooldownGrenade = false;
     }
-    public void OnCollisionEnter(Collision collision)
+    public void PointerEnterCantShoot()
     {
-        if (collision.gameObject.CompareTag("MarchandDetector"))
-        {
-            shopUI.SetActive(true);
-            Time.timeScale = 0f;
-        }
+        canShoot = false;
+    }
+    public void PointerExitCanShoot()
+    {
+        canShoot = true;
+    }
+    public void openMarchandMenu()
+    {
+        shopUI.SetActive(true);
+        Time.timeScale = 0f;
     }
     public void leftMarchandMenu()
     {
-        gameObject.transform.position = outMarchandPosition.position;
+        //gameObject.transform.position = outMarchandPosition.position;
         GameManager.instance.UpdateMoneyHUD();
     }
     public void TakePlayerDamage(float damagePoints)
@@ -140,7 +147,7 @@ public class PlayerShooting : MonoBehaviour
 
     void FixedUpdate()
     {
-        if ((Time.time >= m_timeStamp) && (Input.GetKey(KeyCode.Mouse0)) && !isMaxHeat)
+        if ((Time.time >= m_timeStamp) && (Input.GetKey(KeyCode.Mouse0)) && !isMaxHeat && canShoot)
         {
             Fire();
             m_timeStamp = Time.time + TimeBetweenShots;
