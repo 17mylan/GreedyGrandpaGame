@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
     public ParticleSystem collisionParticles, bloodParticles;
     private PlayerShooting playerShooting;
     private GameManager gameManager;
+    private int levelToAdd;
     public void Start()
     {
         gameManager = GameManager.instance;
@@ -26,6 +27,8 @@ public class Bullet : MonoBehaviour
             stateMachineAI.TakeDamage(bulletDamage);
             Instantiate(bloodParticles, collision.contacts[0].point, Quaternion.identity);
             GameManager.instance.UpdateMoneyHUD();
+            levelToAdd = PlayerPrefs.GetInt("Experience");
+            PlayerPrefs.SetInt("Experience", levelToAdd + 2);
         }
         else if (collision.gameObject.CompareTag("Brique"))
         {
